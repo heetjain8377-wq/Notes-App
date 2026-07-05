@@ -7,7 +7,6 @@ function connectDB(){
     }catch(error){
         console.log("MongoDB connection failed");
         console.log(error);
-        process.exit(1);
     }
 };
 
