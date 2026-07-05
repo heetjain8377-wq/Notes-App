@@ -4,7 +4,7 @@ const logoutBtn = document.getElementById("logoutBtn");
 async function loadNotes(){
     const token = localStorage.getItem("token");
 
-    const response = await fetch("http://localhost:5000/api/note/", {
+    const response = await fetch(`${API_URL}/api/note/`, {
         method : "GET",
         headers : {Authorization : `Bearer ${token}`}
     });
@@ -50,7 +50,7 @@ async function createNote(){
         alert("Enter Something");
     }
 
-    const response = await fetch("http://localhost:5000/api/note/create-note", {
+    const response = await fetch(`${API_URL}/api/note/create-note`, {
         method : "POST",
         headers : {
             "Content-Type":"application/json",
@@ -72,7 +72,7 @@ async function createNote(){
 async function deleteNote(id){
     const token = localStorage.getItem("token");
 
-    const response = await fetch(`http://localhost:5000/api/note/delete-note/${id}`, {
+    const response = await fetch(`${API_URL}/api/note/delete-note/${id}`, {
         method : "DELETE",
         headers : {Authorization : `Bearer ${token}`}
     });
@@ -88,7 +88,7 @@ async function editNote(id){
     const newTitle = prompt("Enter new title");
     const newContent = prompt("Enter new content");
 
-    const response = await fetch(`http://localhost:5000/api/note/update-note/${id}`, {
+    const response = await fetch(`${API_URL}/api/note/update-note/${id}`, {
         method : "PUT",
         headers : {
             "Content-Type" : "application/json",
