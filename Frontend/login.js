@@ -1,6 +1,13 @@
 const message = document.getElementById("message");
+const loginBtn = document.getElementById("loginBtn");
+const loaderContainer = document.querySelector(".loaderContainer");
 
-async function loginUser(){
+loginBtn.addEventListener("click", async() => {
+    loaderContainer.style.display = "flex";
+    loginBtn.disabled = true;
+    loginBtn.style.cursor = "not-allowed";
+    loginBtn.style.opacity = "0.7";
+
     const email = document.getElementById("email").value;
     const password = document.getElementById("password").value;
 
@@ -15,7 +22,14 @@ async function loginUser(){
         })
 
         const data = await response.json();
+
+        loaderContainer.style.display = "none";
+
         message.innerText = data.message;
+
+        loginBtn.style.cursor = "pointer";
+        loginBtn.style.opacity = "1";
+        loginBtn.disabled = false;
 
         if(data.success){
             localStorage.setItem("token", data.token);
@@ -28,4 +42,4 @@ async function loginUser(){
         console.log(error);
         message.innerText = "Something went wrong"
     }
-};
+});

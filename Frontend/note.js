@@ -41,6 +41,13 @@ const addBtn = document.getElementById("addBtn");
 addBtn.addEventListener("click", createNote);
 
 async function createNote(){
+
+    const loaderContainer = document.querySelector(".loaderContainer");
+    loaderContainer.style.display = "flex";
+    addBtn.disabled = true;
+    addBtn.style.cursor = "not-allowed";
+    addBtn.style.opacity = "0.7";
+
     const token = localStorage.getItem("token");
 
     const title = titleInput.value;
@@ -63,6 +70,11 @@ async function createNote(){
     });
 
     const data = await response.json();
+
+    loaderContainer.style.display = "none";
+    addBtn.disabled = false;
+    addBtn.style.cursor = "pointer";
+    addBtn.style.opacity = "1";
 
     console.log(data);
 
@@ -106,9 +118,21 @@ async function editNote(id){
 };
 
 logoutBtn.addEventListener("click", () => {
+
+    const loaderContainer = document.querySelector(".loaderContainer");
+    loaderContainer.style.display = "flex";
+    logoutBtn.disabled = true;
+    logoutBtn.style.cursor = "not-allowed";
+    logoutBtn.style.opacity = "0.7";
+
     localStorage.removeItem("token");
 
     setTimeout(() => {
         window.location.href = "login.html"
     }, 1500);
+
+    loaderContainer.style.display = "none";
+    logoutBtn.disabled = false;
+    logoutBtn.style.cursor = "pointer";
+    logoutBtn.style.opacity = "1";
 });
